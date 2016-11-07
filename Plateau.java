@@ -1,51 +1,72 @@
 
 
+import java.util.ArrayList;
+
 public class Plateau {
 	
-		public int plateau[][]={{0,0,0,0},{2,2,0,0},{2,0,0,0},{0,0,0,0}};
-		private int x = 3;
-		private int y = 3;
+//		public int plateau[][]={{0,0,0,0},{2,2,0,0},{2,0,0,0},{0,0,0,0}};
+//		private int x = 3;
+//		private int y = 3;
+	
+		ArrayList<ArrayList<Integer>> plateau = new ArrayList<ArrayList<Integer>>();		
+		private int taille;
+		public Plateau(int taille){
+			this.taille=taille;
+			for(int j =0;j<taille;j++){
+				plateau.add(j, new ArrayList<Integer>());
+				for(int i=0; i<taille;i++){
+					plateau.get(j).add(i,0);
+					
+				}
+			}
+		}
+		public int getValeur(int x, int y){
+			return plateau.get(y).get(x);
+		}
+		public void setValeur(int x, int y, int valeur){
+			plateau.get(y).set(x, valeur);
+		}
 		public void affiche() 
 		{
 			int i;
 			int j;		
-			for(i=0; i <=y  ;i++ )
+			for(i=0; i <taille  ;i++ )
 			{
-				for(j=0; j <=x; j++)
+				for(j=0; j <taille; j++)
 				{
-					if(plateau[i][j]==0)
+					if(getValeur(j,i)==0)
 					{
 						System.out.print(" |");
 					}else
-					System.out.print(plateau[i][j]+"|");
+					System.out.print(getValeur(j,i)+"|");
 				}
 				System.out.println();
 			}
 		}
+		
 		public void haut(){
 			int i;
 			int j;
-			for(i=3;i>=1;i--)
+			for(i=taille-1;i>=1;i--)
 			{
-				for(j=0; j<=x; j++)
+				for(j=0; j<taille; j++)
 				{
-					if(plateau[i-1][j]==0)
+					if(getValeur(j,i-1)==0)
 					{
-						plateau[i-1][j]=plateau[i][j];
-						plateau[i][j]=0;
+						setValeur(j,i-1,getValeur(j,i));
+						setValeur(j,i-1,0);
 					}
 					else
 					{
-						if(plateau[i-1][j]==plateau[i][j])
+						if(getValeur(j,i-1)==getValeur(j,i))
 						{
-							plateau[i-1][j]=plateau[i-1][j] * 2;
-							plateau[i][j]=0;
+							setValeur(j,i-1,getValeur(j,i) * 2);
+							setValeur(j,i-1,0);
 						}
 					}
 				}
 			}
-		}
-		public void bas(){
+		}		public void bas(){
 			int i;
 			int j;
 			for(i=0;i<=2;i++)
