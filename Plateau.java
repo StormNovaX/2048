@@ -23,8 +23,29 @@ public class Plateau {
 		public int getValeur(int x, int y){
 			return plateau.get(y).get(x);
 		}
+		public int alea(){
+			return (int) (Math.random()*4);
+		}
+		public int aleaValeur(){
+			if( (float) (Math.random()) < 0.9)
+				return 2;
+			else
+				return 4;
+		}
 		public void setValeur(int x, int y, int valeur){
 			plateau.get(y).set(x, valeur);
+		}
+		public void generate(){
+			int test = 1;
+			int a,b;
+			while(test !=0){				
+				a = alea();
+				b = alea();
+				if (plateau.get(a).get(b) == 0){
+					plateau.get(a).set(b,aleaValeur());
+					test = 0;
+				}
+			}
 		}
 		public void affiche() 
 		{
@@ -66,7 +87,8 @@ public class Plateau {
 					}
 				}
 			}
-		}		public void bas(){
+		}
+}/*		public void bas(){
 			int i;
 			int j;
 			for(i=0;i<=2;i++)
@@ -135,4 +157,4 @@ public class Plateau {
 				}
 			}
 		}
-}
+}*/
