@@ -21,7 +21,7 @@ public class Plateau {
 			}
 		}
 		public int getValeur(int x, int y){
-			return plateau.get(x).get(y);
+			return plateau.get(y).get(x);
 		}
 		public int alea(){
 			return (int) (Math.random()*4);
@@ -33,7 +33,7 @@ public class Plateau {
 				return 4;
 		}
 		public void setValeur(int x, int y, int valeur){
-			plateau.get(x).set(y, valeur);
+			plateau.get(y).set(x, valeur);
 		}
 		public void generate(){
 			int test = 1;
@@ -52,8 +52,8 @@ public class Plateau {
 			setValeur(i,j,0);
 		}
 		public void fusion(int i, int j){
-			setValeur(i,j-1,getValeur(i,j) * 2);
-			setValeur(i,j-1,0);
+			setValeur(i-1,j,getValeur(i,j) * 2);
+			setValeur(i,j,0);
 		}
 		public void affiche() 
 		{
@@ -91,6 +91,22 @@ public class Plateau {
 							fusion(i,j);
 						}
 					}
+				}
+			}
+		}
+		public void rotate(){
+			int i;
+			int j;
+			int a;
+			for(i=0;i<taille;i++)
+			{
+				for(j=0; j<taille; j++)
+				{
+					a = getValeur(i,j);				
+					setValeur(i,j,getValeur(j,taille-1-i) );
+					setValeur(j,taille-1-i,getValeur(j,i));
+					setValeur(j,i,getValeur(taille-1-j,i));
+					setValeur(taille-1-i,j,a);
 				}
 			}
 		}
