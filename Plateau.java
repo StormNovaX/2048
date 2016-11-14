@@ -97,86 +97,45 @@ public class Plateau {
 		public void rotate(){
 			int i;
 			int j;
-			int a;
+			int grille[][] = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}};
 			for(i=0;i<taille;i++)
 			{
 				for(j=0; j<taille; j++)
 				{
-					a = getValeur(i,j);				
-					setValeur(i,j,getValeur(j,taille-1-i) );
-					setValeur(j,taille-1-i,getValeur(j,i));
-					setValeur(j,i,getValeur(taille-1-j,i));
-					setValeur(taille-1-i,j,a);
+					grille[taille-1-j][i]=getValeur(i,j);	
+					
+				}
+			}
+			for(i=0;i<taille;i++)
+			{
+				for(j=0; j<taille; j++)
+				{
+					
+					setValeur(i,j,grille[i][j]);
 				}
 			}
 		}
-}/*		public void bas(){
-			int i;
-			int j;
-			for(i=0;i<=2;i++)
-			{
-				for(j=0; j<=x; j++)
-				{
-					if(plateau[i+1][j]==0)
-					{
-						plateau[i+1][j]=plateau[i][j];
-						plateau[i][j]=0;
-					}
-					else
-					{
-						if(plateau[i+1][j]==plateau[i][j])
-						{
-							plateau[i+1][j]=plateau[i+1][j] * 2;
-							plateau[i][j]=0;
-						}
-					}
-				}
-			}
-		}
-		public void gauche(){
-			int i;
-			int j;
-			for(i=0;i<=y;i++)
-			{
-				for(j=3; j>=1; j--)
-				{
-					if(plateau[i][j-1]==0)
-					{
-						plateau[i][j-1]=plateau[i][j];
-						plateau[i][j]=0;
-					}
-					else
-					{
-						if(plateau[i][j-1]==plateau[i][j])
-						{
-							plateau[i][j-1]=plateau[i][j-1] * 2;
-							plateau[i][j]=0;
-						}
-					}
-				}
-			}
+	public void bas(){
+			rotate();
+			rotate();
+			haut();
+			rotate();
+			rotate();
+
+			
 		}
 		public void droite(){
-			int i;
-			int j;
-			for(i=0;i<=y;i++)
-			{
-				for(j=0; j<=x; j++)
-				{
-					if(plateau[i+1][j]==0)
-					{
-						plateau[i+1][j]=plateau[i][j];
-						plateau[i][j]=0;
-					}
-					else
-					{
-						if(plateau[i+1][j]==plateau[i][j])
-						{
-							plateau[i+1][j]=plateau[i+1][j] * 2;
-							plateau[i][j]=0;
-						}
-					}
-				}
-			}
+			rotate();
+			haut();
+			rotate();
+			rotate();
+			rotate();
 		}
-}*/
+		public void gauche(){
+			rotate();
+			rotate();
+			rotate();
+			haut();
+			rotate();
+		}
+}
